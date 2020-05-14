@@ -13,6 +13,13 @@ defmodule BlogAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", BlogAppWeb do
+    pipe_through :api
+
+    post "/sync/push", SyncController, :push
+    get "/sync/pull", SyncController, :pull
+  end
+
   scope "/", BlogAppWeb do
     pipe_through :browser
 
